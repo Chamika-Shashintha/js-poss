@@ -1,5 +1,5 @@
 const login=()=>{
-console.log('running!...');
+//console.log('running!...');
      const email = $('#email').val()
      const password = $('#password').val()  
 
@@ -9,6 +9,7 @@ console.log('running!...');
    .then((resp)=>{
      console.log(resp);
      console.log(resp.user);
+     window.location.replace('dashboard.html')
    })
    .catch((error)=>{
      console.log(error);

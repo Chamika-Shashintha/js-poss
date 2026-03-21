@@ -1,3 +1,5 @@
+
+let orders=[];
 const loadIds=()=>{
     loadCustomerIds();
     loadItemIds();
@@ -30,7 +32,7 @@ firestore
     }))
 }
 
-    
+   
 $('#customer-id').on("change",function (){
     const customerId=$(this).val();
     const firestore = firebase.firestore();
@@ -62,3 +64,34 @@ $('#item-id').on("change",function (){
         }
     })
 });
+
+const addToCart=()=>{
+    const unitPrice = Number.parseInt($('#unit-price').val());
+    const qty = Number.parseInt($('#qty').val());
+    const totalCost =  unitPrice * qty;
+
+    const cartObj={
+        "code":$('#item-id').val(),
+        "description" : $('#description').val(),
+        "unitPrice" : unitPrice,
+        "qty" : qty,
+        "totaCost" : totalCost,
+    };
+
+    orders.push(cartObj);
+
+    $('#cart-body').empty();
+    orders.forEach(data=>{
+        const row =`
+            <tr>
+                <td>${data.code}</td>
+                <td>${data.description}</td>
+                <td>${data.unitPrice}</td>
+                <td>${data.qty}</td>
+                <td>${data.totaCost}</td>   
+            </tr>
+        `;
+
+         $('#cart-body').append(row);
+    });
+}

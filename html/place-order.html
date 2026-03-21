@@ -46,7 +46,9 @@
       </div> 
     </div>
   </div>
+
 <hr>
+
   <div class="container">
     <div class="row">
       <div class="col-3">
@@ -68,11 +70,30 @@
       </div> 
       <div class="col-12">
         <br>
-          <button class="btn btn-primary col-12">Add to cart</button>
+          <button class="btn btn-primary col-12" onclick="addToCart()">Add to cart</button>
       </div> 
     </div>
   </div>
 <hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover">
+        <thead>
+          <th>#ID</th>
+          <th>Description</th>
+          <th>Unit Priice</th>
+          <th>qty</th>
+          <th>Total</th>
+        </thead>
+        <tbody id="cart-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
 
  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>

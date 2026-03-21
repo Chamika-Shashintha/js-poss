@@ -1,8 +1,10 @@
-const loadCustomerIds=()=>{
-    $('#customer-id').emty;
+const loadIds=()=>{
+    loadCustomerIds();
+    loadItemIds();
 }
-
-const firestore = firebase.firestore();
+const loadCustomerIds=()=>{
+    $('#customer-id').empty();
+    const firestore = firebase.firestore();
 firestore
     .collection('customers')
     .get()
@@ -12,6 +14,22 @@ firestore
             $('#customer-id').append(option)
         })
     }))
+}
+
+const loadItemIds=()=>{
+    $('#item-id').empty();
+    const firestore = firebase.firestore();
+firestore
+    .collection('items')
+    .get()
+    .then((recodes =>{
+        recodes.forEach((result)=>{
+            const option = $('<option></optiion>').val(result.id).text(result.id)
+            $('#item-id').append(option)
+        })
+    }))
+}
+
     
 $('#customer-id').on("change",function (){
     const customerId=$(this).val();
@@ -27,7 +45,8 @@ $('#customer-id').on("change",function (){
             $('#salary').val(data.salary)
         }
     })
-});
+})
+
 $('#item-id').on("change",function (){
     const itemId=$(this).val();
     const firestore = firebase.firestore();

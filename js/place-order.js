@@ -7,7 +7,7 @@ const loadIds=()=>{
 const loadCustomerIds=()=>{
     $('#customer-id').empty();
     const firestore = firebase.firestore();
-firestore
+    firestore
     .collection('customers')
     .get()
     .then((recodes =>{
@@ -110,13 +110,13 @@ const placeOrder=()=>{
 
     let obj={
         customer:{
-             customerId:customerId,
+        customerId:customerId,
         name:$('#name').val(),
         address:$('#address').val(),
         salary:Number.parseInt($('#salary').val()),
         },
 
-        orederDate : new Date().toISOString().split('T')[0],
+        orderDate : new Date().toISOString().split('T')[0],
         totalCost: Number.parseInt($('#net-total').val()),
         items:[]  
     }

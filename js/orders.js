@@ -14,7 +14,7 @@ const loadData=()=>{
                 <td>${data.orderDate}</td>
                 <td>LKR ${data.totalCost}</td>
                 <td>
-                        <button class="btn btn-dark btn-sm" onclick="printeData('${records.id}')">Print</button>
+                        <button class="btn btn-dark btn-sm" onclick="printData('${records.id}')">Print</button>
                        
                 </td>
             </tr> 
@@ -25,4 +25,7 @@ const loadData=()=>{
     })
 }
 
-const printeData=()=>{}
+const printData=(id)=>{
+    window.open(`order-details.html?id=${id}`)
+}
+

@@ -75,7 +75,7 @@ const addToCart=()=>{
         "description" : $('#description').val(),
         "unitPrice" : unitPrice,
         "qty" : qty,
-        "totaCost" : totalCost,
+        "totalCost" : totalCost,
     };
 
     orders.push(cartObj);
@@ -88,10 +88,53 @@ const addToCart=()=>{
                 <td>${data.description}</td>
                 <td>${data.unitPrice}</td>
                 <td>${data.qty}</td>
-                <td>${data.totaCost}</td>   
+                <td>${data.totalCost}</td>   
             </tr>
         `;
 
          $('#cart-body').append(row);
     });
+    calculateCost();
+}
+
+const calculateCost=()=>{
+    let ttl=0;
+     orders.forEach(data=>{
+        ttl+=data.totalCost;
+    });
+    $('#net-total').val(ttl);
+}
+
+const placeOrder=()=>{
+     const customerId=$('#customer-id').val();
+
+    let obj={
+        customer:{
+             customerId:customerId,
+        name:$('#name').val(),
+        address:$('#address').val(),
+        salary:Number.parseInt($('#salary').val()),
+        },
+
+        orederDate : new Date().toISOString().split('T')[0],
+        totalCost: Number.parseInt($('#net-total').val()),
+        items:[]  
+    }
+
+    const firestore = firebase.firestore();
+    
+     orders.forEach(data=>{
+        obj.items.push(data)
+   
+    })
+
+    firestore
+    .collection('orders')
+    .add(obj)
+    .then((response)=>{
+         toastr.success('saved!', 'Success!')
+        loadCustomers()
+    }).catch((error)=>{
+        console.log(error);  
+    })
 }

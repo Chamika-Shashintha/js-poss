@@ -87,7 +87,7 @@ const addToCart=()=>{
                 <td>${data.code}</td>
                 <td>${data.description}</td>
                 <td>${data.unitPrice}</td>
-                <td>${data.qty}</td>
+                <td>${data.qty}</td> 
                 <td>${data.totalCost}</td>   
             </tr>
         `;

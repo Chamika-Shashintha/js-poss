@@ -15,6 +15,7 @@ const loadData=()=>{
                 <td>LKR ${data.totalCost}</td>
                 <td>
                         <button class="btn btn-dark btn-sm" onclick="printData('${records.id}')">Print</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteData('${records.id}')">Delete</button>
                        
                 </td>
             </tr> 
@@ -27,5 +28,21 @@ const loadData=()=>{
 
 const printData=(id)=>{
     window.open(`order-details.html?id=${id}`)
+}
+
+
+const deleteData=(id)=>{
+    if(confirm('Are you sure?')){
+       const firestore = firebase.firestore();
+       firestore
+        .collection('orders')
+        .doc(id)
+        .delete()
+        .then(()=>{
+            toastr.success('Delete!', 'Success!')
+            loadData()
+           
+        }) 
+    }
 }
 
